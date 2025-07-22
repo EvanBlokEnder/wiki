@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EvanBlokEnder wiki</title>
+    <style>
+        :root {
+            --primary-color: #4285f4;
+            --secondary-color: #f1f1f1;
+            --card-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .search-bar {
+            display: flex;
+            margin: 1rem 0 2rem;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+        
+        .search-bar button {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card-body p {
+            margin: 0 0 1rem;
+            line-height: 1.5;
+        }
+        
+        .card-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--secondary-color);
+            color: #333;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .card-link:hover {
+            background-color: #ddd;
+        }
+        
+        .add-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+            background-color: #f1f1f1;
+            border: 2px dashed #ccc;
+            cursor: pointer;
+        }
+        
+        .add-card:hover {
+            background-color: #e9e9e9;
+        }
+        
+        .add-card span {
+            font-size: 3rem;
+            color: #666;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>EvanBlokEnder wiki (tutorials)</h1>
+    </header>
+    
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" placeholder="Search the wiki...">
+            <button>Search</button>
+        </div>
+        
+        <div class="cards-container">
+            
+            <div class="card">
+                <div class="card-header">Getting Started</div>
+                <div class="card-body">
+                    <p>mm</p>
+                    <a href="#" class="card-link">Read More</a>
+                </div>
+            </div>
+            
+            <!-- Example Card 2 -->
+            <div class="card">
+                <div class="card-header">Project Documentation</div>
+                <div class="card-body">
+                    <p>mm</p>
+                    <a href="#" class="card-link">View Projects</a>
+                </div>
+            </div>
+            
+       
+            <div class="card">
+                <div class="card-header">mm</div>
+                <div class="card-body">
+                    <p>mm</p>
+                    <a href="#" class="card-link">Browse Articles</a>
+                </div>
+            </div>
+            
+            
+    
+    <footer>
+        <p>© 2025 EvanBlokEnder wiki. All rights reserved.</p>
+    </footer>
+    
+    
+        
+        
+    </script>
+</body>
+</html>
