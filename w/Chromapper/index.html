@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chromapper Tutorial - My Wiki</title>
+    <style>
+        :root {
+            --primary: #6e48aa;
+            --secondary: #9d50bb;
+            --accent: #4776E6;
+            --light: #f5f5f5;
+            --dark: #333;
+            --gray: #777;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin-top: 1.5rem;
+        }
+        
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .tab-btn {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray);
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .tab-btn:hover {
+            color: var(--primary);
+            background: rgba(110, 72, 170, 0.1);
+        }
+        
+        .tab-btn.active {
+            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 2rem;
+            background: white;
+            border-radius: 0 0 8px 8px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .keybind-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        .keybind-table th, .keybind-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .keybind-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .keybind-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .keybind-table tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .key {
+            display: inline-block;
+            padding: 3px 8px;
+            background: var(--dark);
+            color: white;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin: 2px;
+        }
+        
+        .step {
+            background: white;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            line-height: 28px;
+            font-weight: bold;
+        }
+        
+        .tip-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .tip-title {
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .visual-guide {
+            background: white;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .visual-guide img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-top: 1rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        
+        .caption {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-top: 0.5rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .tab-btn {
+                flex: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Chromapper Tutorial</h1>
+            <p>Everything you need to know about mapping in Chromapper</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'getting-started')">Getting Started</button>
+            <button class="tab-btn" onclick="openTab(event, 'keybinds')">Keybinds</button>
+            <button class="tab-btn" onclick="openTab(event, 'mapping-basics')">Mapping Basics</button>
+            <button class="tab-btn" onclick="openTab(event, 'advanced')">Advanced Techniques</button>
+            <button class="tab-btn" onclick="openTab(event, 'workflow')">Workflow Tips</button>
+        </div>
+        
+        <!-- Getting Started Tab -->
+        <div id="getting-started" class="tab-content active">
+            <h2>Getting Started with Chromapper</h2>
+            
+            <div class="step">
+                <span class="step-number">1</span>
+                <h3>Installation and Setup</h3>
+                <p>Download Chromapper from the official website and install it on your computer. Make sure your system meets the minimum requirements.</p>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">2</span>
+                <h3>Creating Your First Project</h3>
+                <p>Launch Chromapper and create a new project. Select the appropriate settings for your map including BPM, time signature, and difficulty level.</p>
+                
+                <div class="visual-guide">
+                    <p>New Project Dialog</p>
+                    <img src="https://via.placeholder.com/800x400?text=New+Project+Dialog" alt="Image">
+                    <p class="caption">Set your BPM and other initial settings when creating a new project</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">3</span>
+                <h3>Importing Your Audio File</h3>
+                <p>Select the sound file, then press save and select your music file. Chromapper will analyze the file and prepare it for mapping.</p>
+                
+                <div class="tip-box">
+                    <div class="tip-title">PRO TIP</div>
+                    <p>Use high quality audio files (preferably OGG or EGG) for the best results. MP3s with low bitrate can cause timing issues.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">4</span>
+                <h3>Basic Interface Overview</h3>
+                <p>Familiarize yourself with the main components of Chromapper's interface:</p>
+                <ul>
+                    <li><strong>Timeline:</strong> Where you place your notes</li>
+                    <li><strong>Toolbar:</strong> Contains all mapping tools</li>
+                    <li><strong>Preview Window:</strong> Shows how your map will look in-game</li>
+                    <li><strong>Properties Panel:</strong> Adjust note properties and map settings</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Keybinds Tab -->
+        <div id="keybinds" class="tab-content">
+            <h2>Chromapper Keybinds</h2>
+            <p>Master these keyboard shortcuts to speed up your mapping workflow.</p>
+            
+            <h3>General Shortcuts</h3>
+            <table class="keybind-table">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Keybind</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Save Project</td>
+                        <td><span class="key">Ctrl</span> + <span class="key">S</span></td>
+                        <td>Saves your current project</td>
+                    </tr>
+                    <tr>
+                        <td>Undo</td>
+                        <td><span class="key">Ctrl</span> + <span class="key">Z</span></td>
+                        <td>Undo last action</td>
+                    </tr>
+                    <tr>
+                        <td>Redo</td>
+                        <td><span class="key">Ctrl</span> + <span class="key">Y</span></td>
+                        <td>Redo last undone action</td>
+                    </tr>
+                    <tr>
+                        <td>Play/Pause</td>
+                        <td><span class="key">Space</span></td>
+                        <td>Toggle playback</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Mapping Tools</h3>
+            <table class="keybind-table">
+                <thead>
+                    <tr>
+                        <th>Tool</th>
+                        <th>Keybind</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Select Tool</td>
+                        <td><span class="key">1</span></td>
+                        <td>Select and move notes</td>
+                    </tr>
+                    <tr>
+                        <td>Note Tool</td>
+                        <td><span class="key">2</span></td>
+                        <td>Place new notes</td>
+                    </tr>
+                    <tr>
+                        <td>Delete Tool</td>
+                        <td><span class="key">3</span></td>
+                        <td>Remove notes</td>
+                    </tr>
+                    <tr>
+                        <td>Slice Tool</td>
+                        <td><span class="key">4</span></td>
+                        <td>Split long notes</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Timeline Navigation</h3>
+            <table class="keybind-table">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Keybind</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Zoom In</td>
+                        <td><span class="key">+</span></td>
+                        <td>Zoom in on timeline</td>
+                    </tr>
+                    <tr>
+                        <td>Zoom Out</td>
+                        <td><span class="key">-</span></td>
+                        <td>Zoom out on timeline</td>
+                    </tr>
+                    <tr>
+                        <td>Move Left</td>
+                        <td><span class="key">←</span></td>
+                        <td>Move view left</td>
+                    </tr>
+                    <tr>
+                        <td>Move Right</td>
+                        <td><span class="key">→</span></td>
+                        <td>Move view right</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="tip-box">
+                <div class="tip-title">PRO TIP</div>
+                <p>You can customize these keybinds in the Settings menu under "Keyboard Shortcuts" to match your personal preferences.</p>
+            </div>
+        </div>
+        
+        <!-- Mapping Basics Tab -->
+        <div id="mapping-basics" class="tab-content">
+            <h2>Mapping Basics</h2>
+            
+            <div class="step">
+                <span class="step-number">1</span>
+                <h3>Placing Your First Notes</h3>
+                <p>Select the Note Tool (<span class="key">2</span>) and click on the timeline where you want to place notes. Use your audio waveform and beat markers as guides.</p>
+                
+                <div class="visual-guide">
+                    <img src="https://via.placeholder.com/800x300?text=Placing+Notes+Example" alt="Placing Notes">
+                    <p class="caption">Place notes aligned with the beat markers and musical elements</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">2</span>
+                <h3>Understanding Note Types</h3>
+                <p>Chromapper has several note types:</p>
+                <ul>
+                    <li><strong>Regular Notes:</strong> Basic notes players need to hit</li>
+                    <li><strong>Hold Notes:</strong> Long notes that require holding</li>
+                    <li><strong>Chain Notes:</strong> Connected notes that flow together</li>
+                    <li><strong>Special Notes:</strong> Unique effects like explosions</li>
+                </ul>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">3</span>
+                <h3>Timing and Beat Alignment</h3>
+                <p>Proper timing is crucial for a good map. Use these techniques:</p>
+                <ul>
+                    <li>Enable the metronome while mapping (<span class="key">M</span>)</li>
+                    <li>Use the beat snap feature to align notes perfectly</li>
+                    <li>Adjust your global offset if notes feel consistently early/late</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Advanced Techniques Tab -->
+        <div id="advanced" class="tab-content">
+            <h2>Advanced Mapping Techniques</h2>
+            
+            <div class="step">
+                <h3>Pattern Theory</h3>
+                <p>Learn to create interesting and playable patterns:</p>
+                <ul>
+                    <li>Vary your patterns to match the music's intensity</li>
+                    <li>Use mirroring and rotation for symmetrical patterns</li>
+                    <li>Create flow between patterns for smooth gameplay</li>
+                </ul>
+            </div>
+            
+            <div class="step">
+                <h3>Advanced Timing Techniques</h3>
+                <p>Take your timing to the next level:</p>
+                <ul>
+                    <li>Use BPM changes for songs with tempo variations</li>
+                    <li>Create custom time signatures for complex rhythms</li>
+                    <li>Apply micro-adjustments for perfect sync</li>
+                </ul>
+            </div>
+            
+            <div class="step">
+                <h3>Effect Mapping</h3>
+                <p>Enhance your maps with visual effects:</p>
+                <ul>
+                    <li>Add light effects synchronized with drops</li>
+                    <li>Use environmental changes for big moments</li>
+                    <li>Create custom particle effects</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Workflow Tips Tab -->
+        <div id="workflow" class="tab-content">
+            <h2>Workflow Tips</h2>
+            
+            <div class="step">
+                <h3>Efficient Mapping Strategies</h3>
+                <p>Streamline your mapping process:</p>
+                <ul>
+                    <li>Map in passes - first rhythm, then patterns, then polish</li>
+                    <li>Use bookmarks (<span class="key">B</span>) to mark important sections</li>
+                    <li>Take breaks to maintain fresh perspective</li>
+                </ul>
+            </div>
+            
+            <div class="step">
+                <h3>Testing and Playtesting</h3>
+                <p>Ensure your map plays well:</p>
+                <ul>
+                    <li>Test frequently as you map</li>
+                    <li>Get feedback from other mappers</li>
+                    <li>Watch replays to identify problem areas</li>
+                </ul>
+            </div>
+            
+            <div class="step">
+                <h3>Publishing Your Map</h3>
+                <p>Share your creation with the world:</p>
+                <ul>
+                    <li>Create a complete package with all necessary files</li>
+                    <li>Write clear map description and credits</li>
+                    <li>Submit to the appropriate community platforms</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function openTab(evt, tabName) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            // Remove active class from all tab buttons
+            const tabButtons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            // Show the current tab and mark button as active
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
